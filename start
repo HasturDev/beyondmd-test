@@ -1,0 +1,30 @@
+@echo off
+cls
+
+:: Check for Docker
+docker --version >nul 2>&1
+IF %ERRORLEVEL% NEQ 0 (
+    echo Docker is not installed.
+    echo Please install Docker from https://docs.docker.com/docker-for-windows/install/
+) ELSE (
+    echo Docker is installed.
+)
+
+:: Check for npm
+npm --version >nul 2>&1
+IF %ERRORLEVEL% NEQ 0 (
+    echo npm is not installed.
+    echo Downloading and installing Node.js (which includes npm)...
+    CALL :install_nodejs
+) ELSE (
+    echo npm is installed.
+)
+
+pause
+exit
+
+:install_nodejs
+PowerShell -Command "& { Invoke-WebRequest https://nodejs.org/dist/v16.15.0/node-v16.15.0-x64.msi -OutFile %TEMP%\nodejs-installer.msi }"
+msiexec /i %TEMP%\nodejs-installer.msi /passive /norestart
+echo Node.js (and npm) installation process has started. Follow the installer instructions to complete installation.
+goto :eof
