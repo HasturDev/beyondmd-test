@@ -7,7 +7,7 @@ In order to use this file, you must execute the appropriate command for your sys
 
 - For Windows systems, use:
  ``` 
-start
+./start.bat
 ```
 
 - For Debian/Ubuntu systems, use:
