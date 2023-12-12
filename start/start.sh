@@ -70,11 +70,19 @@ install_docker() {
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io
     sudo systemctl start docker
     sudo systemctl enable docker
+
+    # Add Docker to PATH
+    echo 'export PATH="/usr/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
 }
 
 # Function to install Node.js
 install_nodejs() {
     curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
     sudo apt-get install -y nodejs
+
+    # Add npm to PATH
+    echo 'export PATH="/usr/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
 }
 
