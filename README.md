@@ -16,5 +16,6 @@ and the file will check for you. This is a work in progress and might not tell y
 ```
 source start/start.sh
 ```
-
+If this doesn't work then you might be on a virtual environment or inside of a container. If this is the case then you may run into issues when attempting to install docker and virtualbox specifically.
+If this is the case then use a linux operating system that is not inside a virtual environment
 Once this is done, the code will check your system for the appropriate packages, libraries, and software. If they are not present, it will attempt to install them.
