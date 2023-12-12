@@ -16,7 +16,7 @@ if ! command -v vagrant &> /dev/null
 then
     echo "Vagrant is not installed."
     echo "Installing Vagrant..."
-    install_vagrant
+    sudo apt install vagrant
 else
     echo "Vagrant is installed."
 fi
@@ -26,7 +26,7 @@ if ! command -v Virtualbox &> /dev/null
 then
     echo "Virtualbox is not installed."
     echo "Installing Virtualbox..."
-    install_virtualbox
+    sudo apt-get install virtualbox
 else
     echo "Virtualbox is installed."
 fi
