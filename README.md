@@ -11,6 +11,7 @@ If you don't know whether or not you have the required installations just use:
 ./start/start.bat
 ```
 and the file will check for you. This is a work in progress and might not tell you if the proper npm packages are installed
+Ansible will not be able to install with this system because fcntl is not supported on windows systems
 
 - For Debian/Ubuntu systems, use:
 ```
