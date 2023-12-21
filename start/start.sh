@@ -26,20 +26,17 @@ if ! command -v Virtualbox &> /dev/null
 then
     echo "Virtualbox is not installed."
     echo "Installing Virtualbox..."
-    sudo apt-get install virtualbox
+    sudo apt install virtualbox virtualbox-qt virtualbox-dkms
+    sudo apt install virtualbox-ext-pack
+    sudo dpkg-reconfigure virtualbox-dkms
+    sudo dpkg-reconfigure virtualbox
+    echo "if this does not work then please try installing the linux-headers-generic or going to this page for further information https://stackoverflow.com/questions/60350358/how-do-i-resolve-the-character-device-dev-vboxdrv-does-not-exist-error-in-ubu"
+    echo "if this does not work then please try going to https://askubuntu.com/questions/1297786/virtualbox-20-10-new-error-warning-the-character-device-dev-vboxdrv-does-not"
+    echo "if that still doesn't work then you are missing important linux headers and will need to install the necessary ones"
 else
     echo "Virtualbox is installed."
 fi
 
-# Function to install Vagrant
-install_vagrant() {
-    # Add your Vagrant installation steps here
-}
-
-# Function to install Virtualbox
-install_virtualbox() {
-    # Add your Virtualbox installation steps here
-}
 # Check for Docker
 if ! command -v docker &> /dev/null
 then
@@ -62,27 +59,23 @@ fi
 
 # Function to install Docker
 install_docker() {
+     # Add Docker's official GPG key:
     sudo apt-get update
-    sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common gnupg lsb-release
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-    sudo systemctl start docker
-    sudo systemctl enable docker
+    sudo apt-get install ca-certificates curl gnupg
+    sudo install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-    # Add Docker to PATH
-    echo 'export PATH="/usr/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
+    # Add the repository to Apt sources:
+    echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+      $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+      sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
 }
 
 # Function to install Node.js
 install_nodejs() {
-    curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-    sudo apt-get install -y nodejs
-
-    # Add npm to PATH
-    echo 'export PATH="/usr/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
+    sudo apt install nodejs npm
 }
 
