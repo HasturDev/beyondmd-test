@@ -1,0 +1,7 @@
+- name: Run tasks on target Docker containers
+  hosts: target_nodes
+  tasks:
+    - name: Create a text file in each container
+      ansible.builtin.copy:
+        content: "Hello from Ansible!"
+        dest: "greeting.txt"

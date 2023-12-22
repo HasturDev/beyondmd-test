@@ -1,0 +1,3 @@
+[target_nodes]
+target1 ansible_connection=docker ansible_user=ansible_user ansible_ssh_pass=pass
+target2 ansible_connection=docker ansible_user=ansible_user ansible_ssh_pass=pass
