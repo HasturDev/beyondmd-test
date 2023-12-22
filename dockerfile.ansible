@@ -18,11 +18,11 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
 RUN pip install ansible docker
 
 # Set the working directory
-WORKDIR /ansible
+WORKDIR ../ansible
 
 # Copy the Ansible playbook, inventory, and configuration file
-COPY ansible/playbook.yml /ansible/playbook.yml
-COPY ansible/inventory /ansible/inventory
+COPY ../ansible/playbook.yml ../ansible/playbook.yml
+COPY ../ansible/inventory ../ansible/inventory
 
 
 # Run the playbook when the container starts
