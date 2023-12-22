@@ -29,3 +29,8 @@
     run node --version
     [ "$status" -eq 0 ]
 }
+
+@test "Ansible is installed" {
+    run ansible --version
+    [ "$status" -eq 0 ]
+}
