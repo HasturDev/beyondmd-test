@@ -17,6 +17,7 @@ then
     echo "Vagrant is not installed."
     echo "Installing Vagrant..."
     sudo apt install vagrant
+    echo "installation complete"
 else
     echo "Vagrant is installed."
 fi
@@ -43,6 +44,7 @@ then
     echo "Docker is not installed."
     echo "Installing Docker..."
     install_docker
+    echo "installation complete"
 else
     echo "Docker is installed."
 fi
@@ -53,12 +55,24 @@ then
     echo "npm is not installed."
     echo "Installing Node.js (which includes npm)..."
     install_nodejs
+    echo "installation complete"
 else
     echo "npm is installed."
 fi
 
+if ! command -v ansible &> /dev/null
+then
+    echo "Ansible is not installed."
+    echo "Installing Ansible..."
+    sudo apt install ansible
+    sudo apt install ansible-core
+    echo "installation complete"
+else
+    echo "Ansible is installed."
+fi
+
 # Function to install Docker
-install_docker() {
+install_docker() {s
      # Add Docker's official GPG key:
     sudo apt-get update
     sudo apt-get install ca-certificates curl gnupg
@@ -78,4 +92,5 @@ install_docker() {
 install_nodejs() {
     sudo apt install nodejs npm
 }
+
 
