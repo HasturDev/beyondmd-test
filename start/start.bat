@@ -77,3 +77,4 @@ IF "%docker_installed%"=="true" (
 )
 
 echo Ansible cannot be installed on this machine because it is a windows machine. Please either use WSL or start a docker container in order to use the Ansible side of this project
+echo You can also try using the automated_ansible_containers branch, but that might not be working properly
