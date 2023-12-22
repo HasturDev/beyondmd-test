@@ -1,0 +1,15 @@
+# Dockerfile for Target Containers
+FROM ubuntu:latest
+
+RUN apt-get update && \
+    apt-get install -y openssh-server sudo && \
+    mkdir /var/run/sshd && \
+    useradd -m ansible_user && \
+    echo 'ansible_user:pass' | chpasswd && \
+    echo 'ansible_user ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# Test writability in /tmp
+RUN mkdir -p /tmp/ansible/tmp \
+    && chmod 777 /tmp/ansible/tmp
+
+CMD ["/usr/sbin/sshd", "-D"]

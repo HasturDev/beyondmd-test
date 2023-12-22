@@ -1,0 +1,29 @@
+# Ansible Control Node Dockerfile
+FROM python:3
+
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+# Test writability in /tmp
+RUN mkdir -p /tmp/ansible/tmp \
+    && chmod 777 /tmp/ansible/tmp
+
+# Install Docker CLI using Docker's official script
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && \
+    sh get-docker.sh
+
+
+# Install Ansible and Docker SDK for Python
+RUN pip install ansible docker
+
+# Set the working directory
+WORKDIR /ansible
+
+# Copy the Ansible playbook, inventory, and configuration file
+COPY ansible/playbook.yml /ansible/playbook.yml
+COPY ansible/inventory /ansible/inventory
+
+
+# Run the playbook when the container starts
+CMD ["ansible-playbook", "-i", "inventory", "playbook.yml"]
